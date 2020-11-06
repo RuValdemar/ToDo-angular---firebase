@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{createMode ? 'Crear' : 'Editar'}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="todoForm" (ngSubmit)="saveTodo()" class="">
+      <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" id="title" class="form-control" placeholder="Título" formControlName="title">
+        <span style="color: red" *ngIf="todoForm.controls['title'].touched && todoForm.controls['title'].errors?.required">Es requerido</span>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Título</label>
+        <textarea id="description" class="form-control" placeholder="Descripción" formControlName="description"></textarea>
+        <span style="color: red" *ngIf="todoForm.controls['description'].touched && todoForm.controls['description'].errors?.required">Es requerido</span>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" id="done" value="" class="form-check-input" formControlName="done">
+        <label class="form-control-label" for="done">Hecho</label>
+      </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="saveTodo()" [disabled]="todoForm.invalid">Guardar</button>
+</div>
